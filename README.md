@@ -1,6 +1,6 @@
 # Code Playground
 
-A monorepo for coding exercises and practice projects using npm workspaces, organized by category.
+A monorepo for coding exercises and practice projects using pnpm workspaces, organized by category.
 
 ## Structure
 
@@ -21,7 +21,7 @@ code-playground/
 ### Initial Setup
 
 ```bash
-npm install
+pnpm install
 ```
 
 This will install dependencies for all exercises in the monorepo.
@@ -41,7 +41,7 @@ This will install dependencies for all exercises in the monorepo.
 
 3. Initialize a new package:
    ```bash
-   npm init -y
+   pnpm init
    ```
 
 4. Update the package name in `package.json` to follow the convention:
@@ -76,42 +76,42 @@ Feel free to add categories like `nextjs/`, `node/`, `python/`, etc.
 
 From the **root** directory:
 ```bash
-npm run <script> -w @code-playground/category-exercise-name
+pnpm --filter @code-playground/category-exercise-name <script>
 ```
 
 Examples:
 ```bash
 # React (dev server)
-npm run dev -w @code-playground/react-counter-app
+pnpm --filter @code-playground/react-counter-app dev
 
 # TypeScript (compile and run)
-npm start -w @code-playground/ts-basic-types
+pnpm --filter @code-playground/ts-basic-types start
 ```
 
 Or navigate to the exercise directory and run directly:
 ```bash
 cd exercises/react/counter-app
-npm run dev
+pnpm dev
 ```
 
 ## Adding Dependencies to an Exercise
 
 From the **root** directory:
 ```bash
-npm install <package-name> -w @code-playground/category-exercise-name
+pnpm --filter @code-playground/category-exercise-name add <package-name>
 ```
 
 Or navigate to the exercise directory:
 ```bash
 cd exercises/your-category/your-exercise
-npm install <package-name>
+pnpm add <package-name>
 ```
 
 ## Cleaning Up
 
 Remove all node_modules:
 ```bash
-npm run clean
+pnpm clean
 ```
 
 ## Tips
@@ -128,8 +128,8 @@ npm run clean
 
 | Category | Example Exercise | Run Command |
 |----------|-----------------|-------------|
-| React | `counter-app` | `npm run dev -w @code-playground/react-counter-app` |
-| TypeScript | `basic-types` | `npm start -w @code-playground/ts-basic-types` |
+| React | `counter-app` | `pnpm --filter @code-playground/react-counter-app dev` |
+| TypeScript | `basic-types` | `pnpm --filter @code-playground/ts-basic-types start` |
 | Algorithms | *(add your own)* | - |
 
 ---

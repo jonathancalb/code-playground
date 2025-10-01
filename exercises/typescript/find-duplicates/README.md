@@ -22,13 +22,13 @@ Given an array of numbers, return all numbers that appear more than once.
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-find-duplicates
+pnpm --filter @code-playground/ts-find-duplicates start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/find-duplicates
-npm start
+pnpm start
 ```
 
 ## What you'll practice

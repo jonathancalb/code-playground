@@ -6,22 +6,22 @@ A simple React counter application built with Vite.
 
 From the **root** of the monorepo:
 ```bash
-npm install  # First time only
-npm run dev -w @code-playground/react-counter-app
+pnpm install  # First time only
+pnpm --filter @code-playground/react-counter-app dev
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/react/counter-app
-npm install  # First time only
-npm run dev
+pnpm install  # First time only
+pnpm dev
 ```
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview production build
 
 ## What's included
 

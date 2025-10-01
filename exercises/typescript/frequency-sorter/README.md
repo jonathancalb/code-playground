@@ -22,13 +22,13 @@ Given an array of integers, sort in **decreasing order of frequency**. If two el
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-frequency-sorter
+pnpm --filter @code-playground/ts-frequency-sorter start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/frequency-sorter
-npm start
+pnpm start
 ```
 
 ## What you'll practice

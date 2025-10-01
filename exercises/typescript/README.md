@@ -6,100 +6,45 @@ Pure TypeScript exercises for practicing language features, data structures, alg
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-exercise-name
+pnpm --filter @code-playground/ts-exercise-name start
 ```
 
 Or navigate to the exercise directory:
 ```bash
 cd exercises/typescript/exercise-name
-npm start
+pnpm start
 ```
 
 ## Creating a New TypeScript Exercise
 
-### Method 1: Copy an Existing Exercise (Recommended)
-
-1. **Copy the basic-types folder:**
+1. **Initialize the project:**
    ```bash
    cd exercises/typescript
-   cp -r basic-types my-new-exercise
-   cd my-new-exercise
+   mkdir my-new-exercise && cd my-new-exercise
+   pnpm init
    ```
 
-2. **Update package.json:**
+2. **Install tsx:**
+   ```bash
+   pnpm add -D tsx
+   ```
+
+3. **Update package.json:**
    ```json
    {
      "name": "@code-playground/ts-my-new-exercise",
-     "description": "Your exercise description"
-   }
-   ```
-
-3. **Edit src/index.ts:**
-   - Replace the content with your exercise code
-   - Keep the `main()` function pattern
-   - Add your logic and tests
-
-4. **Update README.md:**
-   - Describe the problem/concept
-   - Add examples
-   - Update running instructions
-
-5. **Test it:**
-   ```bash
-   npm start
-   ```
-
-### Method 2: Create from Scratch
-
-1. **Create the directory structure:**
-   ```bash
-   cd exercises/typescript
-   mkdir -p my-new-exercise/src
-   cd my-new-exercise
-   ```
-
-2. **Create package.json:**
-   ```json
-   {
-     "name": "@code-playground/ts-my-new-exercise",
-     "version": "1.0.0",
-     "description": "Your description",
-     "main": "dist/index.js",
-     "type": "module",
      "scripts": {
-       "start": "npm run build && node dist/index.js",
-       "build": "tsc",
-       "dev": "tsc --watch"
-     },
-     "devDependencies": {
-       "@types/node": "^20.14.0",
-       "typescript": "^5.5.3"
+       "start": "tsx src/index.ts",
+       "dev": "tsx watch src/index.ts"
      }
    }
    ```
 
-3. **Create tsconfig.json:**
-   ```json
-   {
-     "compilerOptions": {
-       "target": "ES2022",
-       "module": "ES2022",
-       "lib": ["ES2022"],
-       "moduleResolution": "node",
-       "outDir": "./dist",
-       "rootDir": "./src",
-       "strict": true,
-       "esModuleInterop": true,
-       "skipLibCheck": true,
-       "forceConsistentCasingInFileNames": true,
-       "resolveJsonModule": true
-     },
-     "include": ["src/**/*"],
-     "exclude": ["node_modules", "dist"]
-   }
-   ```
-
 4. **Create src/index.ts:**
+   ```bash
+   mkdir src
+   ```
+   
    ```typescript
    function main() {
        console.log("=== My New Exercise ===\n");
@@ -112,15 +57,11 @@ npm start
    main();
    ```
 
-5. **Install dependencies from root:**
+5. **Run it:**
    ```bash
    cd ../../..  # Back to repo root
-   npm install
-   ```
-
-6. **Run it:**
-   ```bash
-   npm start -w @code-playground/ts-my-new-exercise
+   pnpm install
+   pnpm --filter @code-playground/ts-my-new-exercise start
    ```
 
 ## TypeScript Exercise Tips
@@ -180,11 +121,10 @@ main();
 
 ## Scripts Available
 
-All exercises include these npm scripts:
+All exercises include these scripts:
 
-- `npm start` - Compile TypeScript and run (does both automatically!)
-- `npm run build` - Only compile TypeScript to JavaScript
-- `npm run dev` - Watch mode (auto-recompile on file changes)
+- `pnpm start` - Run TypeScript directly with tsx
+- `pnpm dev` - Watch mode (auto-restart on file changes)
 
 ---
 

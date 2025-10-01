@@ -6,22 +6,22 @@ Practice exercise for TypeScript basic types, interfaces, generics, and more.
 
 From the **root** of the monorepo:
 ```bash
-npm install  # First time only
-npm start -w @code-playground/ts-basic-types
+pnpm install  # First time only
+pnpm --filter @code-playground/ts-basic-types start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/basic-types
-npm install  # First time only
-npm start
+pnpm install  # First time only
+pnpm start
 ```
 
 ## Available Scripts
 
-- `npm start` - Compile and run (does both automatically!)
-- `npm run build` - Only compile TypeScript to JavaScript
-- `npm run dev` - Watch mode (auto-recompile on file changes)
+- `pnpm start` - Compile and run (does both automatically!)
+- `pnpm build` - Only compile TypeScript to JavaScript
+- `pnpm dev` - Watch mode (auto-recompile on file changes)
 
 ## What's covered
 
@@ -37,6 +37,6 @@ npm start
 ## Tips
 
 - Edit `src/index.ts` to practice different TypeScript features
-- Use `npm run dev` to auto-compile as you code
+- Use `pnpm dev` to auto-compile as you code
 - The compiled output goes to the `dist/` directory
 

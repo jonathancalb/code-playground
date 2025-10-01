@@ -22,13 +22,13 @@ Given an array of strings, group all anagrams together. Two words are anagrams i
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-anagram-grouper
+pnpm --filter @code-playground/ts-anagram-grouper start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/anagram-grouper
-npm start
+pnpm start
 ```
 
 ## What you'll practice

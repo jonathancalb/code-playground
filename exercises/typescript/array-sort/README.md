@@ -15,13 +15,13 @@ Given an array of product objects, implement functions to sort by:
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-array-sort
+pnpm --filter @code-playground/ts-array-sort start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/array-sort
-npm start
+pnpm start
 ```
 
 ## What you'll practice

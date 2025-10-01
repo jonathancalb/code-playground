@@ -35,13 +35,13 @@ Merged array with both phone and email for matching users.
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-array-join
+pnpm --filter @code-playground/ts-array-join start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/array-join
-npm start
+pnpm start
 ```
 
 ## What you'll practice

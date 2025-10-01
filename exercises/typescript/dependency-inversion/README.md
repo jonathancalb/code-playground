@@ -11,13 +11,13 @@ Practice exercise for the Dependency Inversion Principle (DIP) - one of the SOLI
 
 From the **root** of the monorepo:
 ```bash
-npm start -w @code-playground/ts-dependency-inversion
+pnpm --filter @code-playground/ts-dependency-inversion start
 ```
 
 Or navigate to this directory:
 ```bash
 cd exercises/typescript/dependency-inversion
-npm start
+pnpm start
 ```
 
 ## What you'll learn

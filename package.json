@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "description": "A monorepo for coding exercises and practice projects",
   "private": true,
-  "workspaces": [
-    "exercises/*/*"
-  ],
   "scripts": {
-    "clean": "rm -rf node_modules exercises/*/*/node_modules",
-    "install:all": "npm install"
+    "clean": "rm -rf node_modules exercises/*/*/node_modules"
   },
-  "keywords": ["monorepo", "exercises", "learning"],
   "author": "",
   "license": "ISC"
 }
