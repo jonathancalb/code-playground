@@ -1,0 +1,17 @@
+{
+  "name": "@code-playground/ts-find-duplicates",
+  "version": "1.0.0",
+  "description": "Find duplicate numbers using Set data structure",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.3"
+  }
+}
+
