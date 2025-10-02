@@ -66,11 +66,16 @@ Pure TypeScript exercises for practicing types, generics, and advanced features.
 
 **Example:** `exercises/typescript/basic-types`
 
+### Node.js
+Backend and server-side development with authentication, APIs, databases, and more.
+
+**Example:** `exercises/nodejs/authentication`
+
 ### Algorithms
 Data structures and algorithm challenges (add as needed).
 
 ### Create Your Own
-Feel free to add categories like `nextjs/`, `node/`, `python/`, etc.
+Feel free to add categories like `nextjs/`, etc.
 
 ## Running an Exercise
 
@@ -130,6 +135,7 @@ pnpm clean
 |----------|-----------------|-------------|
 | React | `counter-app` | `pnpm --filter @code-playground/react-counter-app dev` |
 | TypeScript | `basic-types` | `pnpm --filter @code-playground/ts-basic-types start` |
+| Node.js | `authentication` | `pnpm --filter @code-playground/nodejs-authentication start` |
 | Algorithms | *(add your own)* | - |
 
 ---
