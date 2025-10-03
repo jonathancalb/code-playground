@@ -38,6 +38,10 @@ Using a "database" in `data/users.json`, starting with **basic HTML views** and 
 - After `login`, cookie is sent and middleware allows access to `/profile`
 - Without session → `/profile` redirects 302 to `/login`
 
+### Optional Enhancement: Session Store
+- Implement manual cleanup of expired sessions from MemoryStore using `setInterval`
+- Upgrade to Redis (`connect-redis`) for persistent session storage
+
 ---
 
 ## Stage 2 — **Signup** (keeping Cookies + Sessions)
