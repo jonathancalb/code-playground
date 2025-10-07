@@ -38,9 +38,15 @@ Using a "database" in `data/users.json`, starting with **basic HTML views** and 
 - After `login`, cookie is sent and middleware allows access to `/profile`
 - Without session → `/profile` redirects 302 to `/login`
 
-### Optional Enhancement: Session Store
-- Implement manual cleanup of expired sessions from MemoryStore using `setInterval`
-- Upgrade to Redis (`connect-redis`) for persistent session storage
+### Step 1.5 — Migrate from Memory Sessions to Redis
+**Goal:** Replace MemoryStore with persistent Redis storage
+
+- Install `redis` and `connect-redis` packages
+- Set up Redis client and connect to local Redis instance
+- Configure `express-session` to use RedisStore instead of default MemoryStore
+- Test that sessions persist across server restarts (user stays logged in)
+
+**Note:** You can optionally implement memory cleanup with `setInterval` first to understand the memory leak issue before migrating to Redis.
 
 ---
 

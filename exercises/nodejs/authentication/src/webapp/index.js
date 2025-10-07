@@ -22,13 +22,17 @@ router.get('/login', (req, res) => {
   })
 
 router.get('/dashboard', (req, res) => {
-  res.send(`
-    Welcome ${req.session.user}
-  
-    <form action="/api/logout" method="POST">
-      <button type="submit">Logout</button>
-    </form>
-  `)
+  if (req.session.user) {
+    res.send(`
+      Welcome ${req.session.user}
+    
+      <form action="/api/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
+    `)
+  } else {
+    res.redirect('/login')
+  }
 })
 
 export default router

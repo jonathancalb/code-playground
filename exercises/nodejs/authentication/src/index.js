@@ -3,6 +3,11 @@ import express from 'express'
 import session from 'express-session'
 import apiRouter from './api/index.js'
 import webappRouter from './webapp/index.js'
+import { RedisStore } from 'connect-redis'
+import { createClient } from 'redis'
+
+const redisClient = createClient()
+await redisClient.connect()
 
 const app = express()
 const port = 3000
@@ -11,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(session({
+  store: new RedisStore({ client: redisClient }),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
