@@ -1,3 +1,5 @@
 packages:
   - 'exercises/*/*'
+  - 'exercises/concepts/microfrontends/api/*'
+  - 'exercises/concepts/microfrontends/app/*'
 

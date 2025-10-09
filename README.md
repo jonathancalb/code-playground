@@ -64,12 +64,12 @@ This will install dependencies for all exercises in the monorepo.
 ## Exercise Categories
 
 ### Concepts
-General programming concepts including design patterns, authentication, backend fundamentals, and language features.
+General programming concepts including design patterns, authentication, backend fundamentals, and architecture patterns.
 
 **Examples:** 
 - `exercises/concepts/authentication` - Full-stack auth with sessions and JWT
 - `exercises/concepts/dependency-inversion` - Design pattern practice
-- `exercises/concepts/basic-types` - TypeScript fundamentals
+- `exercises/concepts/microfrontends` - Microfrontend architecture with vanilla JS
 
 ### Algorithms
 Data structures and algorithm challenges for problem-solving practice.
@@ -150,6 +150,7 @@ pnpm clean
 | Category | Example Exercise | Run Command |
 |----------|-----------------|-------------|
 | Concepts | `authentication` | `pnpm --filter @code-playground/concepts-authentication dev` |
+| Concepts | `microfrontends` | See [Microfrontends README](exercises/concepts/microfrontends/README.md) |
 | Algorithms | `anagram-grouper` | `pnpm --filter @code-playground/algorithms-anagram-grouper start` |
 | React | `counter-app` | `pnpm --filter @code-playground/react-counter-app dev` |
 

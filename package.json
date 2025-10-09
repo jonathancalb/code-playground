@@ -4,8 +4,17 @@
   "description": "A monorepo for coding exercises and practice projects",
   "private": true,
   "scripts": {
-    "clean": "rm -rf node_modules exercises/*/*/node_modules"
+    "clean": "rm -rf node_modules exercises/*/*/node_modules",
+    "microfrontends:kill-ports": "lsof -ti:3001,3002,5001,5002,5000 | xargs kill -9 2>/dev/null || true",
+    "microfrontends:bff": "pnpm --filter '@code-playground/concepts-microfrontends-*-bff' --parallel start",
+    "microfrontends:build-remotes": "pnpm --filter '@code-playground/concepts-microfrontends-product-catalog' --filter '@code-playground/concepts-microfrontends-shopping-cart' build",
+    "microfrontends:serve-remotes": "pnpm --filter '@code-playground/concepts-microfrontends-product-catalog' --filter '@code-playground/concepts-microfrontends-shopping-cart' --parallel serve",
+    "microfrontends:host": "sleep 3 && pnpm --filter '@code-playground/concepts-microfrontends-host' dev",
+    "microfrontends": "pnpm run microfrontends:kill-ports && pnpm run microfrontends:build-remotes && concurrently \"pnpm run microfrontends:bff\" \"pnpm run microfrontends:serve-remotes\" \"pnpm run microfrontends:host\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
