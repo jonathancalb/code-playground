@@ -1,5 +1,5 @@
 {
-  "name": "@code-playground/ts-dependency-inversion",
+  "name": "@code-playground/concepts-dependency-inversion",
   "version": "1.0.0",
   "description": "Practice dependency inversion principle (DIP)",
   "main": "dist/index.js",

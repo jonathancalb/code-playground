@@ -1,7 +1,7 @@
 {
-  "name": "@code-playground/ts-find-duplicates",
+  "name": "@code-playground/algorithms-array-sort",
   "version": "1.0.0",
-  "description": "Find duplicate numbers using Set data structure",
+  "description": "Practice Array.prototype.sort with different comparators",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

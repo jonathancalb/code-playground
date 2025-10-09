@@ -7,11 +7,18 @@ A monorepo for coding exercises and practice projects using pnpm workspaces, org
 ```
 code-playground/
 ├── exercises/
-│   ├── react/              # React exercises
-│   │   └── counter-app/
-│   ├── typescript/         # TypeScript exercises
+│   ├── concepts/           # General programming concepts
+│   │   ├── authentication/
+│   │   ├── dependency-inversion/
 │   │   └── basic-types/
 │   ├── algorithms/         # Algorithm challenges
+│   │   ├── anagram-grouper/
+│   │   ├── array-sort/
+│   │   └── frequency-sorter/
+│   ├── react/              # React applications
+│   │   ├── counter-app/
+│   │   ├── gif-search/
+│   │   └── users-with-routing/
 │   └── [other-categories]/ # Add your own categories
 └── package.json           # Root package.json with workspace configuration
 ```
@@ -56,26 +63,32 @@ This will install dependencies for all exercises in the monorepo.
 
 ## Exercise Categories
 
+### Concepts
+General programming concepts including design patterns, authentication, backend fundamentals, and language features.
+
+**Examples:** 
+- `exercises/concepts/authentication` - Full-stack auth with sessions and JWT
+- `exercises/concepts/dependency-inversion` - Design pattern practice
+- `exercises/concepts/basic-types` - TypeScript fundamentals
+
+### Algorithms
+Data structures and algorithm challenges for problem-solving practice.
+
+**Examples:**
+- `exercises/algorithms/anagram-grouper` - Group anagrams using Map
+- `exercises/algorithms/array-sort` - Array sorting with comparators
+- `exercises/algorithms/frequency-sorter` - Sort by element frequency
+
 ### React
 Full React applications with Vite, HMR, and modern tooling.
 
-**Example:** `exercises/react/counter-app`
-
-### TypeScript
-Pure TypeScript exercises for practicing types, generics, and advanced features.
-
-**Example:** `exercises/typescript/basic-types`
-
-### Node.js
-Backend and server-side development with authentication, APIs, databases, and more.
-
-**Example:** `exercises/nodejs/authentication`
-
-### Algorithms
-Data structures and algorithm challenges (add as needed).
+**Examples:**
+- `exercises/react/counter-app` - Simple counter with state
+- `exercises/react/gif-search` - API integration with pagination
+- `exercises/react/users-with-routing` - React Router practice
 
 ### Create Your Own
-Feel free to add categories like `nextjs/`, etc.
+Feel free to add categories like `vue/`, `nextjs/`, `databases/`, etc.
 
 ## Running an Exercise
 
@@ -89,8 +102,11 @@ Examples:
 # React (dev server)
 pnpm --filter @code-playground/react-counter-app dev
 
-# TypeScript (compile and run)
-pnpm --filter @code-playground/ts-basic-types start
+# Concepts (compile and run)
+pnpm --filter @code-playground/concepts-authentication dev
+
+# Algorithms (compile and run)
+pnpm --filter @code-playground/algorithms-anagram-grouper start
 ```
 
 Or navigate to the exercise directory and run directly:
@@ -124,7 +140,7 @@ pnpm clean
 - Each exercise is **completely independent** with its own dependencies
 - Organize by technology/topic (react, typescript, algorithms, etc.)
 - Each category can have multiple exercises
-- Use meaningful names: `@code-playground/react-todo-app`, `@code-playground/ts-generics`
+- Use meaningful names: `@code-playground/react-todo-app`, `@code-playground/algorithms-binary-search`, `@code-playground/concepts-oauth`
 - The root `package.json` only manages the workspace
 - Different exercises can use completely different tech stacks
 - Add `.gitignore` patterns as needed
@@ -133,10 +149,9 @@ pnpm clean
 
 | Category | Example Exercise | Run Command |
 |----------|-----------------|-------------|
+| Concepts | `authentication` | `pnpm --filter @code-playground/concepts-authentication dev` |
+| Algorithms | `anagram-grouper` | `pnpm --filter @code-playground/algorithms-anagram-grouper start` |
 | React | `counter-app` | `pnpm --filter @code-playground/react-counter-app dev` |
-| TypeScript | `basic-types` | `pnpm --filter @code-playground/ts-basic-types start` |
-| Node.js | `authentication` | `pnpm --filter @code-playground/nodejs-authentication start` |
-| Algorithms | *(add your own)* | - |
 
 ---
 

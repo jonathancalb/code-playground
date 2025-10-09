@@ -1,7 +1,7 @@
 {
-  "name": "@code-playground/ts-array-sort",
+  "name": "@code-playground/algorithms-array-join",
   "version": "1.0.0",
-  "description": "Practice Array.prototype.sort with different comparators",
+  "description": "Implement a join operation between two arrays",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

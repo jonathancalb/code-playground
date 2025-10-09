@@ -1,7 +1,7 @@
 {
-  "name": "@code-playground/ts-basic-types",
+  "name": "@code-playground/algorithms-find-duplicates",
   "version": "1.0.0",
-  "description": "TypeScript basic types practice",
+  "description": "Find duplicate numbers using Set data structure",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

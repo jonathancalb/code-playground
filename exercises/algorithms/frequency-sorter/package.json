@@ -1,7 +1,7 @@
 {
-  "name": "@code-playground/ts-anagram-grouper",
+  "name": "@code-playground/algorithms-frequency-sorter",
   "version": "1.0.0",
-  "description": "Group anagrams using Map data structure",
+  "description": "Sort array by frequency of elements",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {

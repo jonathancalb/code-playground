@@ -50,6 +50,30 @@ Using a "database" in `data/users.json`, starting with **basic HTML views** and 
 
 ---
 
+### Step 1.6 — Migrate from HTML Forms to Fetch API
+**Goal:** Replace traditional form submission with JavaScript `fetch()` and understand cookie credentials
+
+- **Serve static HTML files** instead of hardcoded HTML strings in `res.send()`
+  - Create a `public/` or `views/` folder with `.html` files
+  - Use `res.sendFile()` or `express.static()` middleware to serve them
+- **Add JavaScript to HTML files:**
+  - Replace HTML form submission with JavaScript that uses `fetch()` to call `/api/login`
+  - Use `preventDefault()` to stop the default form behavior
+  - Handle the response in JavaScript (redirect on success, show error on failure)
+- **Experiment with credentials:**
+  - Try making the request WITHOUT `credentials: 'same-origin'` and observe what happens
+  - **Fix:** Add `credentials: 'same-origin'` to ensure cookies are sent/stored
+- Update API route to return JSON instead of server-side redirects
+
+### Acceptance Criteria
+- HTML pages are served from files, not hardcoded strings
+- Login form uses `fetch()` instead of traditional submission
+- Without `credentials` option, session cookie is not sent/stored (login appears to fail)
+- With `credentials: 'same-origin'`, authentication works correctly
+- Client-side redirect to `/profile` on successful login
+
+---
+
 ## Stage 2 — **Signup** (keeping Cookies + Sessions)
 **Goal:** Add registration while maintaining the **sessions** approach.
 

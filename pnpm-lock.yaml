@@ -8,7 +8,52 @@ importers:
 
   .: {}
 
-  exercises/nodejs/authentication:
+  exercises/algorithms/anagram-grouper:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/algorithms/array-join:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/algorithms/array-sort:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/algorithms/find-duplicates:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/algorithms/frequency-sorter:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/concepts/authentication:
     dependencies:
       bcrypt:
         specifier: ^5.1.1
@@ -35,6 +80,24 @@ importers:
       nodemon:
         specifier: ^3.0.0
         version: 3.1.10
+
+  exercises/concepts/basic-types:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
+
+  exercises/concepts/dependency-inversion:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.14.0
+        version: 20.19.19
+      typescript:
+        specifier: ^5.5.3
+        version: 5.8.3
 
   exercises/react/counter-app:
     dependencies:
@@ -128,69 +191,6 @@ importers:
       vite:
         specifier: ^7.1.7
         version: 7.1.7(@types/node@20.19.19)
-
-  exercises/typescript/anagram-grouper:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/array-join:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/array-sort:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/basic-types:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/dependency-inversion:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/find-duplicates:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
-
-  exercises/typescript/frequency-sorter:
-    devDependencies:
-      '@types/node':
-        specifier: ^20.14.0
-        version: 20.19.19
-      typescript:
-        specifier: ^5.5.3
-        version: 5.8.3
 
 packages:
 

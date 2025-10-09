@@ -1,5 +1,5 @@
 {
-  "name": "@code-playground/nodejs-authentication",
+  "name": "@code-playground/concepts-authentication",
   "version": "1.0.0",
   "description": "Authentication exercise with JWT and password hashing",
   "type": "module",
