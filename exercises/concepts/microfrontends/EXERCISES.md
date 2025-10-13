@@ -2,12 +2,51 @@
 
 This document contains practical exercises and tasks to deepen your understanding of microfrontends architecture.
 
+## 🏗️ Current Architecture Overview
+
+### Shared Services Microfrontend (Port 5003)
+The project now uses a dedicated **shared services microfrontend** that provides:
+
+- **EventBus**: Cross-microfrontend communication using CustomEvents
+- **HTTP Interceptor**: Centralized request handling with error management
+
+### Architecture Benefits
+- **Single Source of Truth**: All microfrontends use the same event bus and HTTP interceptor
+- **Consistency**: Shared logging, error handling, and communication patterns
+- **Maintainability**: Updates to shared services automatically propagate to all microfrontends
+- **Module Federation**: Services are loaded as remote modules, not duplicated code
+
+### Current Setup
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Host (Port 5000)                         │
+│  ┌─────────────────┐  ┌─────────────────┐                   │
+│  │ ProductCatalog  │  │ ShoppingCart    │                   │
+│  │ (Port 5001)     │  │ (Port 5002)     │                   │
+│  └─────────────────┘  └─────────────────┘                   │
+│           │                       │                         │
+│           └───────────┬───────────┘                         │
+│                       │                                     │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │           Shared Services (Port 5003)                   ││
+│  │  • EventBus (CustomEvents)                              ││
+│  │  • HTTP Interceptor (Error handling)                    ││
+│  └─────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────┘
+           │                       │
+           ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐
+│ Product BFF     │    │ Shopping BFF    │
+│   Port: 3001    │    │   Port: 3002    │
+└─────────────────┘    └─────────────────┘
+```
+
 ## 🧪 What to Try (Interactive Exploration)
 
 ### 1. Browser Console Exploration
 Open your browser's developer console and look for these logs:
 
-- `[EventBus] Instance created in HOST`
+- `[EventBus] Instance created in SHARED SERVICES MF`
 - `[HTTP Interceptor] Request: ...`
 - `[HTTP Interceptor] Success: 200`
 
@@ -25,8 +64,8 @@ Open your browser's developer console and look for these logs:
 
 ### 4. Network Tab Analysis
 1. Open Network tab in DevTools
-2. Look for `remoteEntry.js` loaded from ports 5001 and 5002
-3. See Module Federation in action
+2. Look for `remoteEntry.js` loaded from ports 5001, 5002, and 5003
+3. See Module Federation in action (including shared services)
 
 ### 5. Error Handling Testing
 1. Stop one of the BFFs
@@ -63,7 +102,21 @@ Open your browser's developer console and look for these logs:
 - `app/host/src/App.jsx`
 - `app/host/src/components/LoadingSpinner.jsx` (new file)
 
-#### Exercise 3: Add TypeScript
+#### Exercise 3: Extend Shared Services
+**Goal**: Add new shared functionality to the shared services microfrontend
+
+**Tasks**:
+1. Add a new shared utility (e.g., `localStorage` wrapper, `dateFormatter`)
+2. Expose it through the shared services remote
+3. Update host to import and use the new utility
+4. Test that all microfrontends can access the new utility
+
+**Files to modify**:
+- `app/shared-services/src/` (add new utility)
+- `app/shared-services/src/remoteEntry.js` (expose new utility)
+- `app/host/src/App.jsx` (import and use new utility)
+
+#### Exercise 4: Add TypeScript
 **Goal**: Convert the project to TypeScript for better type safety
 
 **Tasks**:
@@ -116,7 +169,7 @@ Open your browser's developer console and look for these logs:
 - `app/auth/src/ProtectedRoute.jsx`
 
 **Files to modify**:
-- `app/host/src/eventBus.js` (add auth events)
+- `app/shared-services/src/eventBus.js` (add auth events)
 - All microfrontends (add auth checks)
 
 #### Exercise 6: Implement Retry Logic in Interceptor
@@ -188,9 +241,9 @@ The current architecture has **separate BFFs** for each microfrontend. As your s
         │                                       │
 ┌───────────────────────────────────────────────────────┐
 │              Host (Port 5000)                         │
-│  ┌─────────────────────┐   ┌─────────────────────┐   │
-│  │ <ProductCatalog/>   │   │ <ShoppingCart/>     │   │
-│  └─────────────────────┘   └─────────────────────┘   │
+│  ┌─────────────────────┐   ┌─────────────────────┐    │
+│  │ <ProductCatalog/>   │   │ <ShoppingCart/>     │    │
+│  └─────────────────────┘   └─────────────────────┘    │
 └───────────────────────────────────────────────────────┘
 ```
 

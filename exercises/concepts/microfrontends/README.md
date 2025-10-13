@@ -1,6 +1,6 @@
 # Microfrontends - Core Concepts
 
-Microfrontends using **React**, **Module Federation** (Vite), and **BFF pattern**. Shows HTTP interceptors, event bus communication, and shared dependencies.
+Microfrontends using **React**, **Module Federation** (Vite), and **BFF pattern**. Shows HTTP interceptors, event bus communication, and **shared services microfrontend**.
 
 ## 🎯 Concepts You'll Learn
 
@@ -18,21 +18,27 @@ Microfrontends using **React**, **Module Federation** (Vite), and **BFF pattern*
 │ Product BFF     │                    │ Shopping BFF    │
 │   Port: 3001    │                    │   Port: 3002    │
 │ - /api/products │                    │ - /api/checkout │
-│ - Interceptors  │                    │ - Interceptors  │
 └─────────────────┘                    └─────────────────┘
         ↑                                       ↑
         │ HTTP                                  │ HTTP
         │                                       │
-┌───────────────────────────────────────────────────────┐
-│              Host (Port 5000)                         │
-│  - Event Bus (CustomEvents)                           │
-│  - Module Federation (loads remotes)                  │
-│                                                       │
-│  ┌─────────────────────┐   ┌─────────────────────┐    │
-│  │ <ProductCatalog/>   │   │ <ShoppingCart/>     │    │
-│  │   From :5001        │   │   From :5002        │    │
-│  └─────────────────────┘   └─────────────────────┘    │
-└───────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    Host (Port 5000)                         │
+│  - Module Federation (loads remotes)                        │
+│                                                             │
+│  ┌─────────────────┐  ┌─────────────────┐                   │
+│  │ ProductCatalog  │  │ ShoppingCart    │                   │
+│  │ (Port 5001)     │  │ (Port 5002)     │                   │
+│  └─────────────────┘  └─────────────────┘                   │
+│           │                       │                         │
+│           └───────────┬───────────┘                         │
+│                       │                                     │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │           Shared Services (Port 5003)                   ││
+│  │  • EventBus (CustomEvents)                              ││
+│  │  • HTTP Interceptor (Error handling)                    ││
+│  └─────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────┘
             ↑                          ↑
             │ Module Federation        │
     ┌───────┴────────┐        ┌────────┴───────┐
@@ -60,7 +66,6 @@ microfrontends/
     ├── host/                       # Shell/Container
     │   ├── src/
     │   │   ├── App.jsx            # Loads remote components
-    │   │   ├── eventBus.js        # Event Bus (CustomEvents)
     │   │   └── main.jsx           # Entry point
     │   ├── vite.config.js         # Module Federation config
     │   ├── index.html
@@ -70,18 +75,26 @@ microfrontends/
     │   ├── src/
     │   │   ├── ProductCatalog.jsx # Component (exposed)
     │   │   └── main.jsx           # Standalone entry
-    │   ├── httpInterceptor.js     # Error handling (401, 404, 500)
     │   ├── vite.config.js         # Exposes component
     │   ├── index.html
     │   └── package.json           # Port 5001, React dependency
     │
-    └── shopping-cart/              # Shopping Cart Frontend
+    ├── shopping-cart/              # Shopping Cart Frontend
+    │   ├── src/
+    │   │   ├── ShoppingCart.jsx   # Component (exposed)
+    │   │   └── main.jsx           # Standalone entry
+    │   ├── vite.config.js         # Exposes component
+    │   ├── index.html
+    │   └── package.json           # Port 5002, React dependency
+    │
+    └── shared-services/            # Shared Services Microfrontend
         ├── src/
-        │   ├── ShoppingCart.jsx   # Component (exposed)
-        │   └── main.jsx           # Standalone entry
-        ├── vite.config.js         # Exposes component
+        │   ├── eventBus.js        # Event Bus (CustomEvents)
+        │   ├── httpInterceptor.js # Error handling (401, 404, 500)
+        │   └── remoteEntry.js     # Exposes shared services
+        ├── vite.config.js         # Exposes services
         ├── index.html
-        └── package.json           # Port 5002, React dependency
+        └── package.json           # Port 5003, React dependency
 ```
 
 ## 🚀 Quick Start
@@ -110,15 +123,19 @@ pnpm start
 cd exercises/concepts/microfrontends/api/shopping-cart-bff
 pnpm start
 
-# Terminal 3 - Product Catalog Frontend (APP)
+# Terminal 3 - Shared Services Frontend (APP)
+cd exercises/concepts/microfrontends/app/shared-services
+pnpm dev
+
+# Terminal 4 - Product Catalog Frontend (APP)
 cd exercises/concepts/microfrontends/app/product-catalog
 pnpm dev
 
-# Terminal 4 - Shopping Cart Frontend (APP)
+# Terminal 5 - Shopping Cart Frontend (APP)
 cd exercises/concepts/microfrontends/app/shopping-cart
 pnpm dev
 
-# Terminal 5 - Host (APP)
+# Terminal 6 - Host (APP)
 cd exercises/concepts/microfrontends/app/host
 pnpm dev
 ```
@@ -128,10 +145,11 @@ pnpm dev
 - **Host**: http://localhost:5000 (composed app)
 - **Product Catalog**: http://localhost:5001 (standalone)
 - **Shopping Cart**: http://localhost:5002 (standalone)
+- **Shared Services**: http://localhost:5003 (standalone)
 - **Product BFF**: http://localhost:3001/api/products
 - **Cart BFF**: http://localhost:3002/api/cart/checkout
 
-⚠️ **Order matters**: API (BFFs) → APP (Frontends) → APP (Host)
+⚠️ **Order matters**: API (BFFs) → APP (Shared Services) → APP (Frontends) → APP (Host)
 
 ## 🔧 How It Works
 
@@ -164,7 +182,40 @@ federation({
 const ProductCatalog = lazy(() => import('productCatalog/ProductCatalog'));
 ```
 
-### 2. HTTP Interceptor with Error Handling
+### 2. Shared Services Microfrontend (Port 5003)
+
+**Host** imports shared services:
+```javascript
+// app/host/src/App.jsx
+import eventBus from 'sharedServices/eventBus';
+import { httpInterceptor } from 'sharedServices/httpInterceptor';
+
+// Expose globally for remotes to use
+window.eventBus = eventBus;
+window.httpInterceptor = httpInterceptor;
+```
+
+**Shared Services** exposes utilities:
+```javascript
+// app/shared-services/src/remoteEntry.js
+export { default as eventBus } from './eventBus';
+export { httpInterceptor } from './httpInterceptor';
+```
+
+**Module Federation config** for shared services:
+```javascript
+// app/shared-services/vite.config.js
+federation({
+  name: 'sharedServices',
+  exposes: {
+    './eventBus': './src/eventBus',
+    './httpInterceptor': './src/httpInterceptor'
+  },
+  shared: ['react', 'react-dom']
+})
+```
+
+### 3. HTTP Interceptor with Error Handling
 
 ```javascript
 export const httpInterceptor = {
@@ -187,7 +238,7 @@ export const httpInterceptor = {
 };
 ```
 
-### 3. Event Bus Communication
+### 4. Event Bus Communication
 
 **Product Catalog** emits:
 ```javascript
@@ -204,7 +255,7 @@ useEffect(() => {
 }, []);
 ```
 
-### 4. BFF Pattern - Each Frontend Has Its Own Backend
+### 5. BFF Pattern - Each Frontend Has Its Own Backend
 
 **Product Catalog BFF** (Port 3001):
 ```javascript
@@ -236,10 +287,17 @@ app.post('/api/cart/checkout', (req, res) => {
 - **JSX Support**: Full Vite + React development experience
 - **Type Safety**: Can add TypeScript if needed
 
+### Shared Services Architecture
+- **Dedicated Microfrontend**: EventBus and HTTP Interceptor in separate MF (Port 5003)
+- **Module Federation**: Services loaded as remote modules, not duplicated code
+- **Single Source of Truth**: All microfrontends use the same shared services
+- **Consistency**: Shared logging, error handling, and communication patterns
+- **Maintainability**: Updates to shared services automatically propagate to all microfrontends
+
 ### Event Bus
 - **CustomEvents API**: Browser-native event system
 - **Same page**: All apps in same DOM (unlike postMessage)
-- **Centralized**: Host provides shared event bus
+- **Centralized**: Shared services microfrontend provides event bus
 - **Decoupled**: Microfrontends don't directly reference each other
 
 ### BFF Pattern
@@ -258,7 +316,7 @@ app.post('/api/cart/checkout', (req, res) => {
 ## 🧪 What to Try
 
 1. **Browser console**:
-   - `[EventBus] Instance created in HOST`
+   - `[EventBus] Instance created in SHARED SERVICES MF`
    - `[HTTP Interceptor] Request: ...`
    - `[HTTP Interceptor] Success: 200`
 
@@ -272,8 +330,8 @@ app.post('/api/cart/checkout', (req, res) => {
    - Headers added (Authorization, etc)
 
 4. **Network tab**:
-   - `remoteEntry.js` loaded from :5001 and :5002
-   - Module Federation in action
+   - `remoteEntry.js` loaded from :5001, :5002, and :5003
+   - Module Federation in action (including shared services)
 
 5. **Test error handling**:
    - Stop BFF → see interceptor error messages
@@ -285,8 +343,9 @@ app.post('/api/cart/checkout', (req, res) => {
 - **Cause**: Host starts before remotes are ready
 - **Solution**: 
   - If using single command: The script has a 5-second delay built-in
-  - If manual: Ensure remotes (5001, 5002) fully start BEFORE host (5000)
+  - If manual: Ensure remotes (5003, 5001, 5002) fully start BEFORE host (5000)
   - Wait for "ready in X ms" message from remotes before starting host
+  - Start shared services (5003) first, then other microfrontends
 
 **CORS errors**
 - Solution: BFFs use `cors()` middleware

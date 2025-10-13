@@ -1,4 +1,4 @@
-// Centralized HTTP Interceptor - shared across all microfrontends
+// HTTP Interceptor - shared across all microfrontends
 export const httpInterceptor = {
   async request(url, options = {}) {
     console.log('[HTTP Interceptor] Request:', url);

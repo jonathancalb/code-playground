@@ -1,4 +1,4 @@
-// Centralized Event Bus - uses CustomEvents
+// Simple Event Bus - uses CustomEvents
 class EventBus {
   constructor() {
     this.element = document.createElement('div');

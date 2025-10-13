@@ -10,7 +10,7 @@ export default defineConfig({
         './httpInterceptor': './src/httpInterceptor.js',
         './eventBus': './src/eventBus.js',
       },
-      shared: [] // No shared dependencies needed for pure services
+      shared: []
     })
   ],
   build: {

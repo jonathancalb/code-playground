@@ -1,15 +1,8 @@
 import { lazy, Suspense } from 'react';
-// Import services from shared services MF
-import eventBus from 'sharedServices/eventBus';
-import { httpInterceptor } from 'sharedServices/httpInterceptor';
 
 // Module Federation - load remote components
 const ProductCatalog = lazy(() => import('productCatalog/ProductCatalog'));
 const ShoppingCart = lazy(() => import('shoppingCart/ShoppingCart'));
-
-// Expose shared services globally for remotes to use
-window.eventBus = eventBus;
-window.httpInterceptor = httpInterceptor;
 
 export default function App() {
   return (
@@ -30,7 +23,8 @@ export default function App() {
           <li><strong>Module Federation</strong>: Remote components loaded at runtime</li>
           <li><strong>Shared React</strong>: One instance via Module Federation config</li>
           <li><strong>Shared Services MF</strong>: HTTP Interceptor & Event Bus as separate MF</li>
-          <li><strong>HTTP Interceptor</strong>: Error handling (401, 404, 500)</li>
+          <li><strong>Direct Imports</strong>: Services imported directly via Module Federation</li>
+          <li><strong>HTTP Interceptor</strong>: Error handling (401, 404, 500) with retry logic</li>
           <li><strong>Event Bus</strong>: CustomEvents for cross-app communication</li>
           <li><strong>BFF Pattern</strong>: Each microfrontend → its own API</li>
         </ul>
