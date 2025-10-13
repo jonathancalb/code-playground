@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+// Import services from shared services MF
+import { httpInterceptor } from 'sharedServices/httpInterceptor';
+import eventBus from 'sharedServices/eventBus';
 
 export default function ProductCatalog() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    window.httpInterceptor.request('http://localhost:3001/api/products')
+    httpInterceptor.request('http://localhost:3001/api/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data);
@@ -19,7 +22,7 @@ export default function ProductCatalog() {
 
   const addToCart = (product) => {
     console.log('[ProductCatalog] Emitting addToCart:', product);
-    window.eventBus.emit('addToCart', product);
+    eventBus.emit('addToCart', product);
   };
 
   if (error) {

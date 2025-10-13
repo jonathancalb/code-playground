@@ -8,6 +8,9 @@ export default defineConfig({
     federation({
       name: 'shoppingCart',
       filename: 'remoteEntry.js',
+      remotes: {
+        sharedServices: 'http://localhost:5003/assets/remoteEntry.js',
+      },
       exposes: {
         './ShoppingCart': './src/ShoppingCart.jsx',
       },

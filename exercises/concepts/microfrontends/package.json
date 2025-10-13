@@ -1,0 +1,19 @@
+{
+  "name": "@code-playground/concepts-microfrontends",
+  "version": "1.0.0",
+  "description": "Microfrontends exercise using React, Module Federation (Vite), and BFF pattern",
+  "private": true,
+  "scripts": {
+    "kill-ports": "lsof -ti:3001,3002,5001,5002,5000,5003 | xargs kill -9 2>/dev/null || true",
+    "bff": "pnpm --filter '@code-playground/concepts-microfrontends-*-bff' --parallel start",
+    "build-remotes": "pnpm --filter '@code-playground/concepts-microfrontends-product-catalog' --filter '@code-playground/concepts-microfrontends-shopping-cart' --filter '@code-playground/concepts-microfrontends-shared-services' build",
+    "serve-remotes": "pnpm --filter '@code-playground/concepts-microfrontends-product-catalog' --filter '@code-playground/concepts-microfrontends-shopping-cart' --filter '@code-playground/concepts-microfrontends-shared-services' --parallel serve",
+    "host": "sleep 3 && pnpm --filter '@code-playground/concepts-microfrontends-host' dev",
+    "start": "pnpm run kill-ports && pnpm run build-remotes && concurrently \"pnpm run bff\" \"pnpm run serve-remotes\" \"pnpm run host\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

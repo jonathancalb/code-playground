@@ -10,6 +10,7 @@ export default defineConfig({
       remotes: {
         productCatalog: 'http://localhost:5001/assets/remoteEntry.js',
         shoppingCart: 'http://localhost:5002/assets/remoteEntry.js',
+        sharedServices: 'http://localhost:5003/assets/remoteEntry.js',
       },
       shared: ['react', 'react-dom']  // Share React - avoid duplication
     })

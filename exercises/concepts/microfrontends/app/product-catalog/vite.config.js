@@ -8,6 +8,9 @@ export default defineConfig({
     federation({
       name: 'productCatalog',
       filename: 'remoteEntry.js',
+      remotes: {
+        sharedServices: 'http://localhost:5003/assets/remoteEntry.js',
+      },
       exposes: {
         './ProductCatalog': './src/ProductCatalog.jsx',
       },

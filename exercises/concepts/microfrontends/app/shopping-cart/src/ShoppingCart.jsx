@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+// Import services from shared services MF
+import { httpInterceptor } from 'sharedServices/httpInterceptor';
+import eventBus from 'sharedServices/eventBus';
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = window.eventBus.on('addToCart', (product) => {
+    const unsubscribe = eventBus.on('addToCart', (product) => {
       console.log('[ShoppingCart] Received addToCart:', product);
       setCart(prev => {
         const existing = prev.find(item => item.id === product.id);
@@ -27,7 +30,7 @@ export default function ShoppingCart() {
     const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
     
     try {
-      const res = await window.httpInterceptor.request('http://localhost:3002/api/cart/checkout', {
+      const res = await httpInterceptor.request('http://localhost:3002/api/cart/checkout', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

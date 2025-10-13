@@ -150,6 +150,15 @@ importers:
         specifier: ^5.0.8
         version: 5.4.20(@types/node@20.19.19)
 
+  exercises/concepts/microfrontends/app/shared-services:
+    devDependencies:
+      '@originjs/vite-plugin-federation':
+        specifier: ^1.3.2
+        version: 1.4.1
+      vite:
+        specifier: ^5.2.0
+        version: 5.4.20(@types/node@20.19.19)
+
   exercises/concepts/microfrontends/app/shopping-cart:
     dependencies:
       react:
