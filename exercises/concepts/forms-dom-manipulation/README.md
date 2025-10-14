@@ -51,8 +51,6 @@ Display: `Total: X | Active: Y | Completed: Z`
 
 ---
 
-## 📋 HTML Structure
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -223,6 +221,26 @@ Use object mapping: `{ high: 3, medium: 2, low: 1 }`
 
 ---
 
+## 🚀 Advanced Feature: Virtualization with Intersection Observer
+
+### **Performance Optimization**
+This exercise includes an advanced implementation of **virtualized lists** using the Intersection Observer API for optimal performance with large datasets.
+
+#### **Key Features:**
+- **Fixed height items** (20px per row)
+- **Lazy loading** - items load as user scrolls
+- **Batch loading** - loads 20 items at a time
+- **Smooth scrolling** with loading indicators
+- **Memory efficient** - only renders visible items
+
+#### **Benefits:**
+- **Scalability** - handles thousands of items without performance issues
+- **User Experience** - smooth scrolling with progressive loading
+- **Memory Management** - only keeps visible items in DOM
+- **Modern API** - uses Intersection Observer for efficient scroll detection
+
+---
+
 ## 💪 Optional Challenges
 
 If you finish early:
@@ -231,3 +249,6 @@ If you finish early:
 2. Allow editing existing tasks
 3. Add categories/tags
 4. Filter by status (Active/Completed/All)
+5. **Implement virtualization** (already included in this exercise!)
+6. Add drag & drop reordering
+7. Implement keyboard shortcuts

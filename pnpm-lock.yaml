@@ -6,11 +6,7 @@ settings:
 
 importers:
 
-  .:
-    devDependencies:
-      concurrently:
-        specifier: ^8.2.2
-        version: 8.2.2
+  .: {}
 
   exercises/algorithms/anagram-grouper:
     devDependencies:
@@ -93,6 +89,18 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.8.3
+
+  exercises/concepts/forms-dom-manipulation:
+    devDependencies:
+      vite:
+        specifier: ^7.1.7
+        version: 7.1.7(@types/node@20.19.19)
+
+  exercises/concepts/microfrontends:
+    devDependencies:
+      concurrently:
+        specifier: ^8.2.2
+        version: 8.2.2
 
   exercises/concepts/microfrontends/api/product-catalog-bff:
     dependencies:

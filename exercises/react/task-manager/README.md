@@ -184,6 +184,28 @@ Use template literals: `` `task ${completed ? 'completed' : ''}` ``
 
 ---
 
+## 🚀 Advanced Feature: Virtualization with Intersection Observer
+
+### **Performance Optimization**
+This exercise includes an advanced implementation of **virtualized lists** using React hooks and the Intersection Observer API for optimal performance with large datasets.
+
+#### **Key Features:**
+- **Fixed height items** (20px per row)
+- **Lazy loading** - items load as user scrolls
+- **Batch loading** - loads 20 items at a time
+- **Smooth scrolling** with loading indicators
+- **Memory efficient** - only renders visible items
+- **React integration** - uses hooks for state management
+
+#### **Benefits:**
+- **Scalability** - handles thousands of items without performance issues
+- **User Experience** - smooth scrolling with progressive loading
+- **Memory Management** - only keeps visible items in DOM
+- **React Integration** - leverages hooks for state management
+- **Modern API** - uses Intersection Observer for efficient scroll detection
+
+---
+
 ## 🚀 Optional Optimizations
 
 If you finish early:
@@ -193,3 +215,6 @@ If you finish early:
 3. **useCallback** - Memoize handler functions
 4. **Custom hook** - useLocalStorage
 5. **React.memo** - Optimize TaskItem re-renders
+6. **Implement virtualization** (already included in this exercise!)
+7. **useReducer** - Complex state management
+8. **Context API** - Global state management
